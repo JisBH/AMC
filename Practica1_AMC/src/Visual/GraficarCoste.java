@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.math.plot.Plot2DPanel;
 import practicaA.SolucionA;
-import practicaB.SolucionB;
 
 /**
  *

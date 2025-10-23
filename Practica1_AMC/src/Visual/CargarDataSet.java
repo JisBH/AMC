@@ -18,7 +18,6 @@ import Comun.Lectura;
 public class CargarDataSet extends javax.swing.JFrame {
 
     private PracticaAMenu jpA;
-    private PracticaBMenu jpB;
     boolean pASeleccionada;
 
     /**
@@ -29,16 +28,6 @@ public class CargarDataSet extends javax.swing.JFrame {
 
         this.jpA = jp;
         pASeleccionada = true;
-
-        this.setLocation(400, 100);
-        this.setTitle("CARGAR DATASET");
-    }
-
-    public CargarDataSet(PracticaBMenu jp) {
-        initComponents();
-
-        this.jpB = jp;
-        pASeleccionada = false;
 
         this.setLocation(400, 100);
         this.setTitle("CARGAR DATASET");
@@ -172,75 +161,50 @@ public class CargarDataSet extends javax.swing.JFrame {
 
     private void btBerlin52(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBerlin52
 
-        if (pASeleccionada) {
-            PracticaAMenu.dataSetA = null;
-            PracticaAMenu.dataSetA = Lectura.leerFichero("berlin52.tsp");
-            jpA.setLbDataSet("berlin52");
-        } else {
-            PracticaBMenu.dataSetB = null;
-            PracticaBMenu.dataSetB = Lectura.leerFichero("berlin52.tsp");
-            jpB.setLbDataSet("berlin52");
-        }
+        PracticaAMenu.dataSetA = null;
+        PracticaAMenu.dataSetA = Lectura.leerFichero("berlin52.tsp");
+        jpA.setLbDataSet("berlin52");
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btBerlin52
 
     private void btCh130(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCh130
 
-        if (pASeleccionada) {
-            PracticaAMenu.dataSetA = null;
-            PracticaAMenu.dataSetA = Lectura.leerFichero("ch130.tsp");
-            jpA.setLbDataSet("ch130");
-        } else {
-            PracticaBMenu.dataSetB = null;
-            PracticaBMenu.dataSetB = Lectura.leerFichero("ch130.tsp");
-            jpB.setLbDataSet("ch130");
-        }
+        PracticaAMenu.dataSetA = null;
+        PracticaAMenu.dataSetA = Lectura.leerFichero("ch130.tsp");
+        jpA.setLbDataSet("ch130");
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btCh130
 
     private void btCh150(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCh150
 
-        if (pASeleccionada) {
-            PracticaAMenu.dataSetA = null;
-            PracticaAMenu.dataSetA = Lectura.leerFichero("ch150.tsp");
-            jpA.setLbDataSet("ch150");
-        } else {
-            PracticaBMenu.dataSetB = null;
-            PracticaBMenu.dataSetB = Lectura.leerFichero("ch150.tsp");
-            jpB.setLbDataSet("ch150");
-        }
+        PracticaAMenu.dataSetA = null;
+        PracticaAMenu.dataSetA = Lectura.leerFichero("ch150.tsp");
+        jpA.setLbDataSet("ch150");
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btCh150
 
     private void btD493(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btD493
 
-        if (pASeleccionada) {
-            PracticaAMenu.dataSetA = null;
-            PracticaAMenu.dataSetA = Lectura.leerFichero("d493.tsp");
-            jpA.setLbDataSet("d493");
-        } else {
-            PracticaBMenu.dataSetB = null;
-            PracticaBMenu.dataSetB = Lectura.leerFichero("d493.tsp");
-            jpB.setLbDataSet("d493");
-        }
+        PracticaAMenu.dataSetA = null;
+        PracticaAMenu.dataSetA = Lectura.leerFichero("d493.tsp");
+        jpA.setLbDataSet("d493");
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btD493
 
     private void btD657(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btD657
 
-        if (pASeleccionada) {
-            PracticaAMenu.dataSetA = null;
-            PracticaAMenu.dataSetA = Lectura.leerFichero("d657.tsp");
-            jpA.setLbDataSet("g657");
-        } else {
-            PracticaBMenu.dataSetB = null;
-            PracticaBMenu.dataSetB = Lectura.leerFichero("d657.tsp");
-            jpB.setLbDataSet("d657");
-        }
+        PracticaAMenu.dataSetA = null;
+        PracticaAMenu.dataSetA = Lectura.leerFichero("d657.tsp");
+        jpA.setLbDataSet("g657");
+
         this.setVisible(false);
 
     }//GEN-LAST:event_btD657
@@ -254,15 +218,10 @@ public class CargarDataSet extends javax.swing.JFrame {
 
                 Lectura.generarDataSet(i, PracticaAMenu.peorcaso);
 
-                if (pASeleccionada) {
-                    PracticaAMenu.dataSetA = null;
-                    PracticaAMenu.dataSetA = Lectura.leerFichero("DataSet" + i + ".tsp");
-                    jpA.setLbDataSet("DataSet" + i);
-                } else {
-                    PracticaBMenu.dataSetB = null;
-                    PracticaBMenu.dataSetB = Lectura.leerFichero("DataSet" + i + ".tsp");
-                    jpB.setLbDataSet("DataSet" + i);
-                }
+                PracticaAMenu.dataSetA = null;
+                PracticaAMenu.dataSetA = Lectura.leerFichero("DataSet" + i + ".tsp");
+                jpA.setLbDataSet("DataSet" + i);
+
                 this.setVisible(false);
 
             } else {

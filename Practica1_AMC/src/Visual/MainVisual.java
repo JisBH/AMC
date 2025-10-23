@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 public class MainVisual extends javax.swing.JFrame {
 
     private PracticaAMenu pA;
-    private PracticaBMenu pB;
     
     /**
      * Creates new form MainVisual
@@ -25,7 +24,6 @@ public class MainVisual extends javax.swing.JFrame {
         this.setTitle("\t\t\tPRACTICA 1 - AMC");
         
         pA = new PracticaAMenu(this);
-        pB = new PracticaBMenu(this);
         
         cambiarPanel(pA);
     }
@@ -40,10 +38,6 @@ public class MainVisual extends javax.swing.JFrame {
         panelCambio.repaint();
     }
     
-    public void btCambiarPracticaToF(Boolean b){
-        btcambiarpanel.setEnabled(b);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,8 +50,6 @@ public class MainVisual extends javax.swing.JFrame {
         PanelBase = new javax.swing.JPanel();
         lbtitulo = new javax.swing.JLabel();
         panelCambio = new javax.swing.JPanel();
-        lbnombreprac = new javax.swing.JLabel();
-        btcambiarpanel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -81,20 +73,6 @@ public class MainVisual extends javax.swing.JFrame {
             .addGap(0, 451, Short.MAX_VALUE)
         );
 
-        lbnombreprac.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lbnombreprac.setForeground(new java.awt.Color(0, 0, 0));
-        lbnombreprac.setText("Practica A");
-
-        btcambiarpanel.setBackground(new java.awt.Color(0, 0, 0));
-        btcambiarpanel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btcambiarpanel.setForeground(new java.awt.Color(255, 255, 255));
-        btcambiarpanel.setText("Cambiar entre Practica A y B");
-        btcambiarpanel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCambiarPanel(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelBaseLayout = new javax.swing.GroupLayout(PanelBase);
         PanelBase.setLayout(PanelBaseLayout);
         PanelBaseLayout.setHorizontalGroup(
@@ -106,23 +84,13 @@ public class MainVisual extends javax.swing.JFrame {
             .addGroup(PanelBaseLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
-                .addComponent(btcambiarpanel)
-                .addGap(18, 18, 18)
-                .addComponent(lbnombreprac, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(25, 599, Short.MAX_VALUE))
         );
         PanelBaseLayout.setVerticalGroup(
             PanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBaseLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(PanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelBaseLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(lbnombreprac, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btcambiarpanel)
-                        .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -142,17 +110,6 @@ public class MainVisual extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCambiarPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCambiarPanel
-        if(lbnombreprac.getText().equals("Practica B")){
-            lbnombreprac.setText("Practica A");
-            cambiarPanel(pA);
-        }
-        else{
-            lbnombreprac.setText("Practica B");
-            cambiarPanel(pB);
-        }
-    }//GEN-LAST:event_btCambiarPanel
 
     /**
      * @param args the command line arguments
@@ -191,8 +148,6 @@ public class MainVisual extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBase;
-    private javax.swing.JButton btcambiarpanel;
-    private javax.swing.JLabel lbnombreprac;
     private javax.swing.JLabel lbtitulo;
     private javax.swing.JPanel panelCambio;
     // End of variables declaration//GEN-END:variables

@@ -108,7 +108,6 @@ public class CompararTodasEstrategias extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVolverMenu(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverMenu
-        mainV.btCambiarPracticaToF(true);
         mainV.cambiarPanel(pA);
         this.setVisible(false);
     }//GEN-LAST:event_btVolverMenu

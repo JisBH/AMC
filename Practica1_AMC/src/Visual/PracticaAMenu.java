@@ -233,7 +233,6 @@ public class PracticaAMenu extends javax.swing.JPanel {
 
     //
     private void btComprobarTodasEstrategias(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobarTodasEstrategias
-        mainV.btCambiarPracticaToF(false);
         CompararTodasEstrategias ctap = new CompararTodasEstrategias(mainV, this);
         mainV.cambiarPanel(ctap);
     }//GEN-LAST:event_btComprobarTodasEstrategias
@@ -246,10 +245,8 @@ public class PracticaAMenu extends javax.swing.JPanel {
     private void btComprobarEstrategia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobarEstrategia
 
         if (dataSetA != null) {
-            mainV.btCambiarPracticaToF(false);
             ComprobarEstrategia cep = new ComprobarEstrategia(mainV, this);
             mainV.cambiarPanel(cep);
-
         } else {
             JOptionPane.showMessageDialog(this,
                     "El array cargado en memoria esta vacio, no se puede ejecutar",
@@ -259,7 +256,6 @@ public class PracticaAMenu extends javax.swing.JPanel {
 
     //
     private void btComprobarDosEstrategias(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobarDosEstrategias
-        mainV.btCambiarPracticaToF(false);
         CompararDosEstrategias cdep = new CompararDosEstrategias(mainV, this);
         mainV.cambiarPanel(cdep);
     }//GEN-LAST:event_btComprobarDosEstrategias
@@ -294,7 +290,7 @@ public class PracticaAMenu extends javax.swing.JPanel {
 
     private void btMostrarDSGrafico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarDSGrafico
         if (dataSetA != null) {
-            Graficar g = new Graficar(dataSetA, null, null);
+            Graficar g = new Graficar(dataSetA, null);
         } else {
             JOptionPane.showMessageDialog(this,
                     "El array cargado en memoria esta vacio, no se puede mostrar",

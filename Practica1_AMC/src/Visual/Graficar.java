@@ -16,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.math.plot.Plot2DPanel;
-import practicaB.SolucionB;
 
 /**
  *
@@ -26,16 +25,14 @@ public class Graficar {
 
     private ArrayList<Punto> puntos;
     private SolucionA solA;
-    private SolucionB solB;
 
     private JFrame frame;
     private JButton btsalir;
     private Plot2DPanel plot = new Plot2DPanel();
 
-    public Graficar(ArrayList<Punto> puntos, SolucionA solA, SolucionB solB) {
+    public Graficar(ArrayList<Punto> puntos, SolucionA solA) {
         this.puntos = puntos;
         this.solA = solA;
-        this.solB = solB;
 
         graficar();
 
@@ -64,24 +61,6 @@ public class Graficar {
             double[] p2 = {solA.getP2().getX(), solA.getP2().getY()};
             plot.addLinePlot("Solucion", Color.BLACK, p1, p2);
         }
-        
-        if(solB != null){
-            int [] ruta = solB.getRuta();
-            int i;
-            
-            for (i = 0; i < ruta.length-1; i++) {
-                double[] p1 = {puntos.get(ruta[i]).getX(), puntos.get(ruta[i]).getY()};
-                double[] p2 = {puntos.get(ruta[i+1]).getX(), puntos.get(ruta[i+1]).getY()};
-                plot.addLinePlot("Solucion", Color.RED, p1, p2);
-                if(i==0)
-                    plot.addLinePlot("Solucion", Color.BLACK, p1, p2);
-                    
-            }
-            
-            double[] p1 = {puntos.get(ruta[0]).getX(), puntos.get(ruta[0]).getY()};
-            plot.addScatterPlot("Solucion", Color.BLACK, p1, p1);
-        }
-
     }
 
     private JPanel construirpanelPrincipal() {
