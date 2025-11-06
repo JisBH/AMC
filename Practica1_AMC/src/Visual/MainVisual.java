@@ -56,9 +56,9 @@ public class MainVisual extends javax.swing.JFrame {
 
         PanelBase.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbtitulo.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
+        lbtitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 25)); // NOI18N
         lbtitulo.setForeground(new java.awt.Color(0, 0, 0));
-        lbtitulo.setText("PRACTICA 1");
+        lbtitulo.setText("<html><center> Práctica 1 <br> Análisis de Algoritmos Exhaustivos  <br> con Poda y algoritmos Divide y Vencerás  </center></html>");
 
         panelCambio.setPreferredSize(new java.awt.Dimension(786, 451));
 
@@ -66,33 +66,32 @@ public class MainVisual extends javax.swing.JFrame {
         panelCambio.setLayout(panelCambioLayout);
         panelCambioLayout.setHorizontalGroup(
             panelCambioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 805, Short.MAX_VALUE)
         );
         panelCambioLayout.setVerticalGroup(
             panelCambioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PanelBaseLayout = new javax.swing.GroupLayout(PanelBase);
         PanelBase.setLayout(PanelBaseLayout);
         PanelBaseLayout.setHorizontalGroup(
             PanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelBaseLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBaseLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
+                .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(PanelBaseLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 599, Short.MAX_VALUE))
+                .addGap(162, 162, 162)
+                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelBaseLayout.setVerticalGroup(
             PanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBaseLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(panelCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,11 +114,6 @@ public class MainVisual extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -144,7 +138,7 @@ public class MainVisual extends javax.swing.JFrame {
                 new MainVisual().setVisible(true);
             }
         });
-    }
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelBase;
