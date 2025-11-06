@@ -9,14 +9,14 @@ import Comun.Lectura;
 
 public class CargarDataSet extends javax.swing.JFrame {
 
-    private PracticaMenu jpA;
-    boolean pASeleccionada;
+    private PracticaMenu jp1;
+    boolean p1Seleccionada;
 
     public CargarDataSet(PracticaMenu jp) {
         initComponents();
 
-        this.jpA = jp;
-        pASeleccionada = true;
+        this.jp1 = jp;
+        p1Seleccionada = true;
 
         this.setLocation(400, 100);
         this.setTitle("CARGAR DATASET");
@@ -146,9 +146,9 @@ public class CargarDataSet extends javax.swing.JFrame {
 
     private void btBerlin52(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBerlin52
 
-        PracticaMenu.dataSetA = null;
-        PracticaMenu.dataSetA = Lectura.leerFichero("berlin52.tsp");
-        jpA.setLbDataSet("berlin52");
+        PracticaMenu.dataSet = null;
+        PracticaMenu.dataSet = Lectura.leerFichero("berlin52.tsp");
+        jp1.setLbDataSet("berlin52");
 
         this.setVisible(false);
 
@@ -156,9 +156,9 @@ public class CargarDataSet extends javax.swing.JFrame {
 
     private void btCh130(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCh130
 
-        PracticaMenu.dataSetA = null;
-        PracticaMenu.dataSetA = Lectura.leerFichero("ch130.tsp");
-        jpA.setLbDataSet("ch130");
+        PracticaMenu.dataSet = null;
+        PracticaMenu.dataSet = Lectura.leerFichero("ch130.tsp");
+        jp1.setLbDataSet("ch130");
 
         this.setVisible(false);
 
@@ -166,9 +166,9 @@ public class CargarDataSet extends javax.swing.JFrame {
 
     private void btCh150(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCh150
 
-        PracticaMenu.dataSetA = null;
-        PracticaMenu.dataSetA = Lectura.leerFichero("ch150.tsp");
-        jpA.setLbDataSet("ch150");
+        PracticaMenu.dataSet = null;
+        PracticaMenu.dataSet = Lectura.leerFichero("ch150.tsp");
+        jp1.setLbDataSet("ch150");
 
         this.setVisible(false);
 
@@ -176,9 +176,9 @@ public class CargarDataSet extends javax.swing.JFrame {
 
     private void btD493(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btD493
 
-        PracticaMenu.dataSetA = null;
-        PracticaMenu.dataSetA = Lectura.leerFichero("d493.tsp");
-        jpA.setLbDataSet("d493");
+        PracticaMenu.dataSet = null;
+        PracticaMenu.dataSet = Lectura.leerFichero("d493.tsp");
+        jp1.setLbDataSet("d493");
 
         this.setVisible(false);
 
@@ -186,9 +186,9 @@ public class CargarDataSet extends javax.swing.JFrame {
 
     private void btD657(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btD657
 
-        PracticaMenu.dataSetA = null;
-        PracticaMenu.dataSetA = Lectura.leerFichero("d657.tsp");
-        jpA.setLbDataSet("g657");
+        PracticaMenu.dataSet = null;
+        PracticaMenu.dataSet = Lectura.leerFichero("d657.tsp");
+        jp1.setLbDataSet("g657");
 
         this.setVisible(false);
 
@@ -203,9 +203,9 @@ public class CargarDataSet extends javax.swing.JFrame {
 
                 Lectura.generarDataSet(i, PracticaMenu.peorcaso);
 
-                PracticaMenu.dataSetA = null;
-                PracticaMenu.dataSetA = Lectura.leerFichero("DataSet" + i + ".tsp");
-                jpA.setLbDataSet("DataSet" + i);
+                PracticaMenu.dataSet = null;
+                PracticaMenu.dataSet = Lectura.leerFichero("DataSet" + i + ".tsp");
+                jp1.setLbDataSet("DataSet" + i);
 
                 this.setVisible(false);
 

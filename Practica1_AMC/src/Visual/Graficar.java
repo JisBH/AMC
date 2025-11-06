@@ -24,15 +24,15 @@ import org.math.plot.Plot2DPanel;
 public class Graficar {
 
     private ArrayList<Punto> puntos;
-    private Solucion solA;
+    private Solucion sol;
 
     private JFrame frame;
     private JButton btsalir;
     private Plot2DPanel plot = new Plot2DPanel();
 
-    public Graficar(ArrayList<Punto> puntos, Solucion solA) {
+    public Graficar(ArrayList<Punto> puntos, Solucion sol) {
         this.puntos = puntos;
-        this.solA = solA;
+        this.sol = sol;
 
         graficar();
 
@@ -56,9 +56,9 @@ public class Graficar {
 
         plot.addScatterPlot("Datos", Color.GREEN, x, y);
 
-        if (solA != null) {
-            double[] p1 = {solA.getP1().getX(), solA.getP1().getY()};
-            double[] p2 = {solA.getP2().getX(), solA.getP2().getY()};
+        if (sol != null) {
+            double[] p1 = {sol.getP1().getX(), sol.getP1().getY()};
+            double[] p2 = {sol.getP2().getX(), sol.getP2().getY()};
             plot.addLinePlot("Solucion", Color.BLACK, p1, p2);
         }
     }

@@ -20,7 +20,7 @@ import org.math.plot.Plot2DPanel;
 public class PracticaMenu extends javax.swing.JPanel {
 
     public static boolean peorcaso = false;
-    public static ArrayList<Punto> dataSetA = null;
+    public static ArrayList<Punto> dataSet = null;
 
     private MainVisual mainV;
 
@@ -244,7 +244,7 @@ public class PracticaMenu extends javax.swing.JPanel {
 
     private void btComprobarEstrategia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobarEstrategia
 
-        if (dataSetA != null) {
+        if (dataSet != null) {
             ComprobarEstrategia cep = new ComprobarEstrategia(mainV, this);
             mainV.cambiarPanel(cep);
         } else {
@@ -275,7 +275,7 @@ public class PracticaMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_ckpeorcasoActionPerformed
 
     private void btMostrarDatasetTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarDatasetTabla
-        if (dataSetA != null) {
+        if (dataSet != null) {
             MostrarDataSetTabla mdtf = new MostrarDataSetTabla();
 
             mdtf.setLocation(300, 100);
@@ -289,8 +289,8 @@ public class PracticaMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btMostrarDatasetTabla
 
     private void btMostrarDSGrafico(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMostrarDSGrafico
-        if (dataSetA != null) {
-            Graficar g = new Graficar(dataSetA, null);
+        if (dataSet != null) {
+            Graficar g = new Graficar(dataSet, null);
         } else {
             JOptionPane.showMessageDialog(this,
                     "El array cargado en memoria esta vacio, no se puede mostrar",

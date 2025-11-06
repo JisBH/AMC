@@ -21,7 +21,7 @@ import practica1.Solucion;
 public class ComprobarEstrategia extends javax.swing.JPanel {
 
     private MainVisual mainV;
-    private PracticaMenu pA;
+    private PracticaMenu p1;
     
     private Solucion sol = null;
     
@@ -32,7 +32,7 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
         initComponents();
 
         mainV = m;
-        pA = p;
+        p1 = p;
         
     }
 
@@ -140,7 +140,7 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVolverMenu(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverMenu
-        mainV.cambiarPanel(pA);
+        mainV.cambiarPanel(p1);
         this.setVisible(false);
     }//GEN-LAST:event_btVolverMenu
 
@@ -150,25 +150,25 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
         String s[] = {"Estrategia","Punto 1","Punto 2","Distancia","Calculadas","Tiempo(mseg)"};
         dtm.setColumnIdentifiers(s);
         
-        String cadena = pA.getLbDataSet() + ".tsp\nEstrategia\t    Punto 1\t\tPunto 2\t\tDistancia\tTiempo\tCalculadas";
+        String cadena = p1.getLbDataSet() + ".tsp\nEstrategia\t    Punto 1\t\tPunto 2\t\tDistancia\tTiempo\tCalculadas";
         DecimalFormat df = new DecimalFormat("#0.00000000");
 
         long t1 = System.nanoTime();
-        sol = Algoritmos.exhaustivoRecursivo((ArrayList<Punto>) PracticaMenu.dataSetA.clone());
+        sol = Algoritmos.exhaustivoRecursivo((ArrayList<Punto>) PracticaMenu.dataSet.clone());
         long t2 = System.nanoTime();
         double aux = (double) (t2 - t1) / 1000000;
         dtm.addRow(new Object[]{"Exhaustivo", sol.getP1(), sol.getP2(), df.format(sol.getDist()), sol.getCalculadas(), aux});
         Lectura.generarSolucionCE("Exhaustivo", sol.getP1().toString(), sol.getP1().toString(), sol.getDist(), aux);
 
         t1 = System.nanoTime();
-        sol = Algoritmos.exhaustivoPodaRecursivo((ArrayList<Punto>) PracticaMenu.dataSetA.clone());
+        sol = Algoritmos.exhaustivoPodaRecursivo((ArrayList<Punto>) PracticaMenu.dataSet.clone());
         t2 = System.nanoTime();
         aux = (double) (t2 - t1) / 1000000;
         dtm.addRow(new Object[]{"Exhaustivo P", sol.getP1(), sol.getP2(), df.format(sol.getDist()), sol.getCalculadas(), aux});
         Lectura.generarSolucionCE("Exhaustivo Poda", sol.getP1().toString(), sol.getP1().toString(), sol.getDist(), aux);
 
         t1 = System.nanoTime();
-        sol = Algoritmos.DyVRecursivo((ArrayList<Punto>) PracticaMenu.dataSetA.clone());
+        sol = Algoritmos.DyVRecursivo((ArrayList<Punto>) PracticaMenu.dataSet.clone());
         t2 = System.nanoTime();
         aux = (double) (t2 - t1) / 1000000;
         dtm.addRow(new Object[]{"Divide y Venceras", sol.getP1(), sol.getP2(), df.format(sol.getDist()), sol.getCalculadas(), aux});
@@ -176,7 +176,7 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
         Lectura.generarSolucionCE("Divide y Venceras", sol.getP1().toString(), sol.getP1().toString(), sol.getDist(), aux);
 
         t1 = System.nanoTime();
-        sol = Algoritmos.DyVconPodaRecursivo((ArrayList<Punto>) PracticaMenu.dataSetA.clone());
+        sol = Algoritmos.DyVconPodaRecursivo((ArrayList<Punto>) PracticaMenu.dataSet.clone());
         t2 = System.nanoTime();
         aux = (double) (t2 - t1) / 1000000;
         dtm.addRow(new Object[]{"Divide y Venceras M", sol.getP1(), sol.getP2(), df.format(sol.getDist()), sol.getCalculadas(), aux});
@@ -187,7 +187,7 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
 
     private void btGraficarSolucion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficarSolucion
         if(sol != null)
-            new Graficar(PracticaMenu.dataSetA, sol);
+            new Graficar(PracticaMenu.dataSet, sol);
         else {
             JOptionPane.showMessageDialog(this,
                     "Debes ejecutar primero para poder mostrar la grafica",

@@ -13,7 +13,7 @@ import practica1.Solucion;
 public class CompararDosEstrategias extends javax.swing.JPanel {
 
     private MainVisual mainV;
-    private PracticaMenu pA;
+    private PracticaMenu p1;
 
     private int num;
 
@@ -22,7 +22,7 @@ public class CompararDosEstrategias extends javax.swing.JPanel {
 
         num = 0;
         mainV = m;
-        pA = p;
+        p1 = p;
     }
 
     @SuppressWarnings("unchecked")
@@ -148,7 +148,7 @@ public class CompararDosEstrategias extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVolverMenu(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverMenu
-        mainV.cambiarPanel(pA);
+        mainV.cambiarPanel(p1);
         this.setVisible(false);
     }//GEN-LAST:event_btVolverMenu
 

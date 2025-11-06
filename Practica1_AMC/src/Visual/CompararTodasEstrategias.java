@@ -21,7 +21,7 @@ import practica1.Solucion;
 public class CompararTodasEstrategias extends javax.swing.JPanel {
 
     private MainVisual mainV;
-    private PracticaMenu pA;
+    private PracticaMenu p1;
 
     /**
      * Creates new form ComprobarTodosAlgortimosPanel
@@ -30,7 +30,7 @@ public class CompararTodasEstrategias extends javax.swing.JPanel {
         initComponents();
 
         mainV = m;
-        pA = p;
+        p1 = p;
     }
 
     /**
@@ -108,7 +108,7 @@ public class CompararTodasEstrategias extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVolverMenu(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverMenu
-        mainV.cambiarPanel(pA);
+        mainV.cambiarPanel(p1);
         this.setVisible(false);
     }//GEN-LAST:event_btVolverMenu
 
