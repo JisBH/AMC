@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class MainVisual extends javax.swing.JFrame {
 
     private PracticaMenu p1;
-    
+
     /**
      * Creates new form MainVisual
      */
@@ -22,22 +22,22 @@ public class MainVisual extends javax.swing.JFrame {
         initComponents();
         this.setLocation(300, 100);
         this.setTitle("\t\t\tPRACTICA 1 - AMC");
-        
+
         p1 = new PracticaMenu(this);
-        
+
         cambiarPanel(p1);
     }
-    
-    public void cambiarPanel(JPanel p){
-        p.setSize(786, 451 );
+
+    public void cambiarPanel(JPanel p) {
+        p.setSize(786, 451);
         p.setLocation(0, 0);
-        
+
         panelCambio.removeAll();
         panelCambio.add(p, BorderLayout.CENTER);
         panelCambio.validate();
         panelCambio.repaint();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

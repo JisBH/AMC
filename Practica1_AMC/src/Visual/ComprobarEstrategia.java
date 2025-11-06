@@ -4,7 +4,6 @@
  */
 package Visual;
 
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -22,9 +21,9 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
 
     private MainVisual mainV;
     private PracticaMenu p1;
-    
+
     private Solucion sol = null;
-    
+
     /**
      * Creates new form ComprobarEstrategiaPane
      */
@@ -33,7 +32,7 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
 
         mainV = m;
         p1 = p;
-        
+
     }
 
     /**
@@ -145,11 +144,11 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
     }//GEN-LAST:event_btVolverMenu
 
     private void btEjecutar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutar
-        
+
         DefaultTableModel dtm = new DefaultTableModel();
-        String s[] = {"Estrategia","Punto 1","Punto 2","Distancia","Calculadas","Tiempo(mseg)"};
+        String s[] = {"Estrategia", "Punto 1", "Punto 2", "Distancia", "Calculadas", "Tiempo(mseg)"};
         dtm.setColumnIdentifiers(s);
-        
+
         String cadena = p1.getLbDataSet() + ".tsp\nEstrategia\t    Punto 1\t\tPunto 2\t\tDistancia\tTiempo\tCalculadas";
         DecimalFormat df = new DecimalFormat("#0.00000000");
 
@@ -181,19 +180,19 @@ public class ComprobarEstrategia extends javax.swing.JPanel {
         aux = (double) (t2 - t1) / 1000000;
         dtm.addRow(new Object[]{"Divide y Venceras M", sol.getP1(), sol.getP2(), df.format(sol.getDist()), sol.getCalculadas(), aux});
         Lectura.generarSolucionCE("Divide y Venceras Mejorado", sol.getP1().toString(), sol.getP1().toString(), sol.getDist(), aux);
-        
+
         tbtabla.setModel(dtm);
     }//GEN-LAST:event_btEjecutar
 
     private void btGraficarSolucion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficarSolucion
-        if(sol != null)
+        if (sol != null) {
             new Graficar(PracticaMenu.dataSet, sol);
-        else {
+        } else {
             JOptionPane.showMessageDialog(this,
                     "Debes ejecutar primero para poder mostrar la grafica",
                     "INFO", JOptionPane.WARNING_MESSAGE);
         }
-            
+
     }//GEN-LAST:event_btGraficarSolucion
 
 

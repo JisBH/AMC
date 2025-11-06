@@ -73,7 +73,7 @@ public class Graficar {
 
     private JPanel construirPanelSur() {
         JPanel panel = new JPanel();
-        
+
         btsalir = new JButton("Volver al Menu");
         btsalir.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +81,7 @@ public class Graficar {
                 frame.setVisible(false);
             }
         });
-        
+
         panel.add(btsalir);
         return panel;
     }

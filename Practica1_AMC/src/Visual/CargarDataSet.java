@@ -22,7 +22,6 @@ public class CargarDataSet extends javax.swing.JFrame {
         this.setTitle("CARGAR DATASET");
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

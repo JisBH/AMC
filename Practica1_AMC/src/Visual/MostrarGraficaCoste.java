@@ -93,7 +93,7 @@ public class MostrarGraficaCoste extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSeleccionar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSeleccionar
-        new GraficarCoste((String)jComboBox1.getSelectedItem());
+        new GraficarCoste((String) jComboBox1.getSelectedItem());
         this.dispose();
     }//GEN-LAST:event_btSeleccionar
 

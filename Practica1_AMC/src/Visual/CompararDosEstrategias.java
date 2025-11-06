@@ -1,4 +1,3 @@
-
 package Visual;
 
 import java.io.FileNotFoundException;

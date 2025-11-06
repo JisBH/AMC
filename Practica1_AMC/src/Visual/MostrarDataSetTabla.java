@@ -15,24 +15,24 @@ import Comun.Punto;
 public class MostrarDataSetTabla extends javax.swing.JFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
-            
+
     /**
      * Creates new form MostrarDataSetTablaForm
      */
     public MostrarDataSetTabla() {
         initComponents();
-        
+
         this.setTitle("TABLA DE PUNTOS");
-        
-        String s[] = {"ID","X","Y"};
+
+        String s[] = {"ID", "X", "Y"};
         dtm.setColumnIdentifiers(s);
-        
+
         ArrayList<Punto> puntos = PracticaMenu.dataSet;
-        
-        for(int i=0; i < puntos.size(); i++){
+
+        for (int i = 0; i < puntos.size(); i++) {
             dtm.addRow(new Object[]{puntos.get(i).getIndice(), puntos.get(i).getX(), puntos.get(i).getY()});
         }
-        
+
         tabtabla.setModel(dtm);
     }
 
