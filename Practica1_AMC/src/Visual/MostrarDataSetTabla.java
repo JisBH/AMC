@@ -27,7 +27,7 @@ public class MostrarDataSetTabla extends javax.swing.JFrame {
         String s[] = {"ID","X","Y"};
         dtm.setColumnIdentifiers(s);
         
-        ArrayList<Punto> puntos = PracticaAMenu.dataSetA;
+        ArrayList<Punto> puntos = PracticaMenu.dataSetA;
         
         for(int i=0; i < puntos.size(); i++){
             dtm.addRow(new Object[]{puntos.get(i).getIndice(), puntos.get(i).getX(), puntos.get(i).getY()});

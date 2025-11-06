@@ -1,4 +1,4 @@
-package practicaA;
+package practica1;
 
 import Comun.Punto;
 
@@ -11,19 +11,19 @@ import Comun.Punto;
  *
  * @author USER
  */
-public class SolucionA {
+public class Solucion {
     Punto p1;
     Punto p2;
     double dist;
     int calculadas;
     
-    public SolucionA(){
+    public Solucion(){
         p1=null;
         p2=null;
         dist=0;
     }
 
-    public SolucionA(Punto p1, Punto p2) {
+    public Solucion(Punto p1, Punto p2) {
         this.p1 = p1;
         this.p2 = p2;
         dist = distancia(p1, p2);

@@ -9,7 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import practicaA.SolucionA;
+import practica1.Solucion;
 
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -24,13 +24,13 @@ import org.math.plot.Plot2DPanel;
 public class Graficar {
 
     private ArrayList<Punto> puntos;
-    private SolucionA solA;
+    private Solucion solA;
 
     private JFrame frame;
     private JButton btsalir;
     private Plot2DPanel plot = new Plot2DPanel();
 
-    public Graficar(ArrayList<Punto> puntos, SolucionA solA) {
+    public Graficar(ArrayList<Punto> puntos, Solucion solA) {
         this.puntos = puntos;
         this.solA = solA;
 

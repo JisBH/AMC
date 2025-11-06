@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import practicaA.Algoritmos;
+import practica1.Algoritmos;
 import Comun.Lectura;
 import Comun.Punto;
-import practicaA.SolucionA;
+import practica1.Solucion;
 
 /**
  *
@@ -21,12 +21,12 @@ import practicaA.SolucionA;
 public class CompararTodasEstrategias extends javax.swing.JPanel {
 
     private MainVisual mainV;
-    private PracticaAMenu pA;
+    private PracticaMenu pA;
 
     /**
      * Creates new form ComprobarTodosAlgortimosPanel
      */
-    public CompararTodasEstrategias(MainVisual m, PracticaAMenu p) {
+    public CompararTodasEstrategias(MainVisual m, PracticaMenu p) {
         initComponents();
 
         mainV = m;
@@ -116,11 +116,11 @@ public class CompararTodasEstrategias extends javax.swing.JPanel {
         String cadena = "\tExhaustivo\tExhaustivoP\tDyV\tDyV Mejorado\nTalla\tTiempo(mseg)\tTiempo(mseg)\tTiempo(mseg)\tTiempo(mseg)";
         long t1, t2;
         double aux;
-        SolucionA sol = new SolucionA();
+        Solucion sol = new Solucion();
 
         for (int i = 1000; i <= 5000; i += 1000) {
 
-            Lectura.generarDataSet(i, PracticaAMenu.peorcaso);
+            Lectura.generarDataSet(i, PracticaMenu.peorcaso);
 
             ArrayList<Punto> p = Lectura.leerFichero("DataSet" + i + ".tsp");
 

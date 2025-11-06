@@ -17,7 +17,7 @@ import org.math.plot.Plot2DPanel;
  *
  * @author USER
  */
-public class PracticaAMenu extends javax.swing.JPanel {
+public class PracticaMenu extends javax.swing.JPanel {
 
     public static boolean peorcaso = false;
     public static ArrayList<Punto> dataSetA = null;
@@ -27,7 +27,7 @@ public class PracticaAMenu extends javax.swing.JPanel {
     /**
      * Creates new form PracticaAMain
      */
-    public PracticaAMenu(MainVisual m) {
+    public PracticaMenu(MainVisual m) {
         initComponents();
 
         mainV = m;

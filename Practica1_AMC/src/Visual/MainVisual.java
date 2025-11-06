@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  */
 public class MainVisual extends javax.swing.JFrame {
 
-    private PracticaAMenu pA;
+    private PracticaMenu pA;
     
     /**
      * Creates new form MainVisual
@@ -23,7 +23,7 @@ public class MainVisual extends javax.swing.JFrame {
         this.setLocation(300, 100);
         this.setTitle("\t\t\tPRACTICA 1 - AMC");
         
-        pA = new PracticaAMenu(this);
+        pA = new PracticaMenu(this);
         
         cambiarPanel(pA);
     }
