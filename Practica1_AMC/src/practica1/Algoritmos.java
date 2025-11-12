@@ -173,10 +173,11 @@ public class Algoritmos {
 
         if (opc > 3) {
             int m = (i + d) / 2;
-            Solucion di = DyV(puntos, i, m);
+            
+            Solucion di = DyVconPoda(puntos, i, m);
             calculadas += di.getCalculadas();
 
-            Solucion dd = DyV(puntos, m + 1, d);
+            Solucion dd = DyVconPoda(puntos, m + 1, d);
             calculadas += dd.getCalculadas();
 
             Solucion dmin = new Solucion();

@@ -17,7 +17,7 @@ public class Lectura {
             FileWriter fichero = null;
             String d = "DataSet" + numele + ".tsp";
             fichero = new FileWriter(d);
-            fichero.write("NAME: DataSet" + numele + " David Rico");
+            fichero.write("NAME: DataSet" + numele + "");
             fichero.write("\nTYPE: TSP GENERATE");
             fichero.write("\nCOMMENT: " + numele + " locations");
             fichero.write("\nDIMENSION: " + numele + "");

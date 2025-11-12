@@ -1,4 +1,4 @@
-NAME: DataSet100 David Rico
+NAME: DataSet100
 TYPE: TSP GENERATE
 COMMENT: 100 locations
 DIMENSION: 100
