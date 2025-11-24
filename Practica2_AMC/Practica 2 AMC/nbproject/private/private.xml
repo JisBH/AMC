@@ -2,6 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Aplicacion/Main.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Modelo/Proceso.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Modelo/Transicion.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Modelo/AFD.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Modelo/AFND.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Controlador/ControladorPrincipal.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Controlador/ControladorTecladoAFD.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Controlador/ControladorTecladoAFND.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Controlador/ControladorAutomata.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Vista/VistaTecladoAFND.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Vista/VistaTecladoAFD.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Vista/VistaAutomata.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Vista/VistaPrincipal.java</file>
+            <file>file:/home/ulysses/Desktop/Proyectos/AMC/Practica2_AMC/Practica%202%20AMC/src/Vista/VistaMensajes.java</file>
+        </group>
     </open-files>
 </project-private>

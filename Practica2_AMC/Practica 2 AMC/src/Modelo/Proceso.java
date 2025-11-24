@@ -1,19 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package Modelo;
 
-/**
- *
- * @author USER
- */
 public interface Proceso {
-
-    public abstract boolean esFinal(int estado); //true si estado es un estado final
-
-    public abstract boolean reconocer(String cadena); //true si la cadena es reconocida
+    public abstract boolean esFinal(String estado); 
+    public abstract boolean reconocer(String cadena);
 
     @Override
-    public abstract String toString(); //muestra las transiciones y estados finales
+    public abstract String toString();
 }

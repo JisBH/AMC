@@ -1,54 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
-import java.util.ArrayList;
+import java.util.Set;
 
-/**
- *
- * @author USER
- */
 public class Transicion {
 
-    private int estadoinicial;
+    private String estadoOrigen;
     private char simbolo;
-    private int estadofinal;
-    private ArrayList<Integer> estadosfinales;
+    private String estadoDestino; 
+    private Set<String> estadosDestinoSet; 
 
-    public Transicion(int estadoini, char cambio, int estadofin) { //TRANSICION AFD
-        this.estadoinicial = estadoini;
+    public Transicion(String estadoIni, char cambio, String estadoFin) {
+        this.estadoOrigen = estadoIni;
         this.simbolo = cambio;
-        this.estadofinal = estadofin;
+        this.estadoDestino = estadoFin;
     }
 
-    public Transicion(int estadoini, char cambio, ArrayList<Integer> estadosfin) { //TRANSICION AFND
-        this.estadoinicial = estadoini;
+    public Transicion(String estadoIni, char cambio, Set<String> estadosFin) {
+        this.estadoOrigen = estadoIni;
         this.simbolo = cambio;
-        this.estadosfinales = estadosfin;
+        this.estadosDestinoSet = estadosFin;
     }
 
-    public Transicion(int estadoini, ArrayList<Integer> estadosfin) { //TRANSICION λ AFND
-        this.estadoinicial = estadoini;
+    public Transicion(String estadoIni, Set<String> estadosFin) {
+        this.estadoOrigen = estadoIni;
         this.simbolo = 'λ';
-        this.estadosfinales = estadosfin;
+        this.estadosDestinoSet = estadosFin;
     }
 
-    public int getEstadoinicial() {
-        return estadoinicial;
+    public String getEstadoOrigen() {
+        return estadoOrigen;
     }
 
     public char getSimbolo() {
         return simbolo;
     }
 
-    public int getEstadofinal() {
-        return estadofinal;
+    public String getEstadoDestino() {
+        return estadoDestino;
     }
 
-    public ArrayList<Integer> getEstadosFinales() {
-        return estadosfinales;
+    public Set<String> getEstadosDestinoSet() {
+        return estadosDestinoSet;
     }
-
 }

@@ -12,8 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -47,227 +48,149 @@ public class ControladorPrincipal implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Fichero": {
-                JFileChooser jfile = new JFileChooser();
-                jfile.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
+                fc.setFileFilter(filtro);
+                int result = fc.showOpenDialog(vPrincipal);
 
-                FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto", "txt");
-                jfile.setFileFilter(filtro);
-
-                if (jfile.showOpenDialog(jfile) != JFileChooser.CANCEL_OPTION) {
-                    File fichero = jfile.getSelectedFile();
-
-                    try {
-                        Scanner scan = new Scanner(fichero);
-                        String[] partes = scan.nextLine().split(" ");
-
-                        if (partes[1].equals("AFD")) {
-                            automataD = null;
-                            leerFicheroAFD(fichero);
-                            vPrincipal.dispose();
-
-                            ControladorAutomata ca = new ControladorAutomata(automataD, fichero.toString());
-
-                            vPrincipal.setVisible(true);
-
-                        } else if (partes[1].equals("AFND")) {
-                            automataND = null;
-                            leerFicheroAFND(fichero);
-                            vPrincipal.dispose();
-
-                            ControladorAutomata ca = new ControladorAutomata(automataND, fichero.toString());
-
-                            vPrincipal.setVisible(true);
-
-                        } else {
-                            vMensaje.mensajeJOptionPaneERROR("El archivo no es un automata", "ERROR", jfile);
-                        }
-
-                    } catch (FileNotFoundException ex) {
-                        vMensaje.mensajeJOptionPaneERROR("Error al obtener el fichero", "ERROR", jfile);
-                    }
-
-                } else {
-                    jfile.setVisible(false);
+                if (result != JFileChooser.CANCEL_OPTION) {
+                    File nombreFichero = fc.getSelectedFile();
+                    leerFichero(nombreFichero);
                 }
-
+                break;
             }
-            break;
 
             case "Teclado": {
-                if (vPrincipal.jComboBox.getSelectedItem().equals("AFD")) {
+                String tipo = (String) vPrincipal.jComboBox.getSelectedItem();
+                if (tipo.equals("AFD")) {
                     automataD = new AFD();
-                    vPrincipal.dispose();
-                    
-                    ControladorTecladoAFD ctAFD = new ControladorTecladoAFD(automataD);
-                    if(ctAFD.noSeguir()){
-                        vPrincipal.setVisible(true);
-                        break;
+                    ControladorTecladoAFD c = new ControladorTecladoAFD(automataD);
+                    if (!c.noSeguir()) {
+                        ControladorAutomata ca = new ControladorAutomata(automataD);
                     }
-
-                    ControladorAutomata ca = new ControladorAutomata(automataD, "Automata Creado por Teclado");
-                    
-                    vPrincipal.setVisible(true);
-
                 } else {
                     automataND = new AFND();
-                    vPrincipal.dispose();
-                    
-                    ControladorTecladoAFND ctAFND = new ControladorTecladoAFND(automataND);
-                    if(ctAFND.noSeguir()){
-                        vPrincipal.setVisible(true);
-                        break;
+                    ControladorTecladoAFND c = new ControladorTecladoAFND(automataND);
+                    if (!c.noSeguir()) {
+                        ControladorAutomata ca = new ControladorAutomata(automataND);
                     }
-
-                    ControladorAutomata ca = new ControladorAutomata(automataND, "Automata Creado por Teclado");
-                    
-                    vPrincipal.setVisible(true);
-
                 }
-            }
-            break;
-
-            case "Salir":
-                vPrincipal.dispose();
                 break;
+            }
+
+            case "Salir": {
+                System.exit(0);
+                break;
+            }
         }
     }
 
-    public void leerFicheroAFD(File fichero) {
+    public void leerFichero(File fichero) {
         try {
-            automataD = new AFD();
             Scanner scan = new Scanner(fichero);
+            String linea = scan.nextLine();
+            String[] partes = linea.split(" ");
+            String tipo = partes[1];
 
-            for (int i = 0; i < 5; i++) {
-                String linea = scan.nextLine();
-                String[] partes = linea.split(" ");
-
-                switch (partes[0]) {
-                    case "ESTADOS:":
-                        for (int j = 1; j < partes.length; j++) {
-                            String[] ef = partes[j].split("q");
-                            automataD.añadirEstado(Integer.parseInt(ef[1]));
-                        }
-                        break;
-
-                    case "INICIAL:":
-                        String[] ei = partes[1].split("q");
-                        automataD.setEstadoInicial(Integer.parseInt(ei[1]));
-                        break;
-
-                    case "FINALES:":
-                        for (int j = 1; j < partes.length; j++) {
-                            String[] ef = partes[j].split("q");
-                            automataD.añadirEstadoFinal(Integer.parseInt(ef[1]));
-                        }
-                        break;
-
-                    case "TRANSICIONES:":
-                        linea = scan.nextLine();
-                        while (!linea.equals("FIN")) {
-                            partes = linea.split(" ");
-
-                            String[] eo = partes[0].split("q");
-                            String[] simb = partes[1].split("'");
-                            String[] ed = partes[2].split("q");
-
-                            automataD.agregarTransicion(Integer.parseInt(eo[1]), simb[1].charAt(0),
-                                    Integer.parseInt(ed[1]));
-
+            if (tipo.equals("AFD")) {
+                automataD = new AFD();
+                while (scan.hasNextLine()) {
+                    linea = scan.nextLine();
+                    partes = linea.split(" ");
+                    switch (partes[0]) {
+                        case "ESTADOS:":
+                            for (int i = 1; i < partes.length; i++) {
+                                automataD.agregarEstado(partes[i]);
+                            }
+                            break;
+                        case "INICIAL:":
+                            automataD.setEstadoInicial(partes[1]);
+                            break;
+                        case "FINALES:":
+                            for (int i = 1; i < partes.length; i++) {
+                                automataD.agregarEstadoFinal(partes[i]);
+                            }
+                            break;
+                        case "TRANSICIONES:":
                             linea = scan.nextLine();
-                        }
-                        break;
+                            while (!linea.equals("FIN")) {
+                                partes = linea.split(" ");
+                                // Ya no hacemos split("q") ni parseInt. Pasamos el String directo.
+                                // Formato: Origen 'Simbolo' Destino
+                                String origen = partes[0];
+                                char simbolo = partes[1].charAt(1); // Asume formato 'a'
+                                String destino = partes[2];
+                                
+                                automataD.agregarTransicion(origen, simbolo, destino);
+                                linea = scan.nextLine();
+                            }
+                            break;
+                    }
                 }
+                ControladorAutomata c = new ControladorAutomata(automataD);
+
+            } else { // AFND
+                automataND = new AFND();
+                while (scan.hasNextLine()) {
+                    linea = scan.nextLine();
+                    partes = linea.split(" ");
+                    switch (partes[0]) {
+                        case "ESTADOS:":
+                            for (int i = 1; i < partes.length; i++) {
+                                // No es necesario guardar estados explícitamente en AFND si se añaden con transiciones,
+                                // pero lo mantenemos por consistencia si el método existe.
+                            }
+                            break;
+                        case "INICIAL:":
+                            automataND.setEstadoInicial(partes[1]);
+                            break;
+                        case "FINALES:":
+                            for (int i = 1; i < partes.length; i++) {
+                                automataND.agregarEstadoFinal(partes[i]);
+                            }
+                            break;
+                        case "TRANSICIONES:":
+                            linea = scan.nextLine();
+                            while (!linea.equals("TRANSICIONES LAMBDA:") && !linea.equals("FIN")) {
+                                partes = linea.split(" ");
+                                String origen = partes[0];
+                                // partes[1] es el simbolo 'x'
+                                char simbolo = partes[1].charAt(1); 
+                                
+                                Set<String> destinos = new HashSet<>();
+                                for (int j = 2; j < partes.length; j++) {
+                                    destinos.add(partes[j]);
+                                }
+
+                                automataND.agregarTransicion(origen, simbolo, destinos);
+                                linea = scan.nextLine();
+                            }
+                            
+                            if (linea.equals("TRANSICIONES LAMBDA:")) {
+                                linea = scan.nextLine();
+                                while (!linea.equals("FIN")) {
+                                    partes = linea.split(" ");
+                                    String origen = partes[0];
+                                    Set<String> destinos = new HashSet<>();
+                                    for (int j = 1; j < partes.length; j++) {
+                                        destinos.add(partes[j]);
+                                    }
+                                    automataND.agregarTransicionLambda(origen, destinos);
+                                    linea = scan.nextLine();
+                                }
+                            }
+                            break;
+                    }
+                }
+                ControladorAutomata c = new ControladorAutomata(automataND);
             }
 
         } catch (FileNotFoundException ex) {
             System.out.println("Fichero no encontrado");
-        }
-    }
-
-    public void leerFicheroAFND(File fichero) {
-        try {
-            automataND = new AFND();
-
-            Scanner scan = new Scanner(fichero);
-
-            for (int i = 0; i < 5; i++) {
-                String linea = scan.nextLine();
-                String[] partes = linea.split(" ");
-
-                switch (partes[0]) {
-                    case "ESTADOS:":
-                        for (int j = 1; j < partes.length; j++) {
-                            String[] ef = partes[j].split("q");
-                            automataND.añadirEstado(Integer.parseInt(ef[1]));
-                        }
-                        break;
-
-                    case "INICIAL:":
-                        String[] ei = partes[1].split("q");
-                        automataND.setEstadoInicial(Integer.parseInt(ei[1]));
-                        break;
-
-                    case "FINALES:":
-                        for (int j = 1; j < partes.length; j++) {
-                            String[] ef = partes[j].split("q");
-                            automataND.añadirEstadoFinal(Integer.parseInt(ef[1]));
-                        }
-                        break;
-
-                    case "TRANSICIONES:":
-                        linea = scan.nextLine();
-                        while (!linea.equals("TRANSICIONES LAMBDA:")) {
-                            partes = linea.split(" ");
-
-                            String[] eo = null;
-                            String[] simb = null;
-                            ArrayList<Integer> eds = new ArrayList<>();
-
-                            for (int j = 0; j < partes.length; j++) {
-                                switch (j) {
-                                    case 0:
-                                        eo = partes[0].split("q");
-                                        break;
-                                    case 1:
-                                        simb = partes[1].split("'");
-                                        break;
-                                    default:
-                                        String[] ed = partes[j].split("q");
-                                        eds.add(Integer.parseInt(ed[1]));
-                                }
-                            }
-
-                            automataND.agregarTransicion(Integer.parseInt(eo[1]), simb[1].charAt(0),
-                                    eds);
-                            linea = scan.nextLine();
-                        }
-
-                        linea = scan.nextLine();
-                        while (!linea.equals("FIN")) {
-                            partes = linea.split(" ");
-
-                            String[] eo = null;
-                            ArrayList<Integer> eds = new ArrayList<>();
-
-                            for (int j = 0; j < partes.length; j++) {
-                                switch (j) {
-                                    case 0:
-                                        eo = partes[0].split("q");
-                                        break;
-                                    default:
-                                        String[] ed = partes[j].split("q");
-                                        eds.add(Integer.parseInt(ed[1]));
-                                }
-                            }
-                            automataND.agregarTransicionλ(Integer.parseInt(eo[1]), eds);
-                            linea = scan.nextLine();
-                        }
-                        break;
-                }
-            }
-
-        } catch (FileNotFoundException ex) {
-            System.out.println("Fichero no encontrado");
+        } catch (Exception ex) {
+            System.out.println("Error al leer el fichero: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }

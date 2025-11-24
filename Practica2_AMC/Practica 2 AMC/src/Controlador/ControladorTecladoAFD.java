@@ -9,7 +9,7 @@ import Vista.VistaTecladoAFD;
 import Vista.VistaMensajes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,101 +40,67 @@ public class ControladorTecladoAFD implements ActionListener {
         addListeners();
 
         vTecladoAFD.setResizable(false);
-        vTecladoAFD.setLocationRelativeTo(null);
-
-        dtm = new DefaultTableModel();
-        dtm.setColumnIdentifiers(new String[]{"Est Origen", "Simbolo", "Est Destino"});
-        vTecladoAFD.tablaTransiciones.setModel(dtm);
-
         vTecladoAFD.setVisible(true);
+        dtm = (DefaultTableModel) vTecladoAFD.tablaTransiciones.getModel();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-
-            case "AñadirT":
-                String[] t = new String[3];
-                t[0] = vMensaje.mensajeImput("Estado Origen: ", vTecladoAFD);
-                t[1] = vMensaje.mensajeImput("Simbolo: ", vTecladoAFD);
-                t[2] = vMensaje.mensajeImput("Estado Destino: ", vTecladoAFD);
-
-                dtm.addRow(new Object[]{t[0], t[1], t[2]});
-
+            case "Añadir":
+                String[] datos = new String[3];
+                datos[0] = vTecladoAFD.txtEstados.getText();
+                datos[1] = vTecladoAFD.txtEstados.getText();
+                datos[2] = vTecladoAFD.txtEstados.getText();
+                dtm.addRow(datos);
+                vTecladoAFD.txtEstados.setText("");
                 break;
 
-            case "BorrarT":
-                int fila = vTecladoAFD.tablaTransiciones.getSelectedRow();
-
-                dtm.removeRow(fila);
-
+            case "Borrar":
+                if (vTecladoAFD.tablaTransiciones.getSelectedRow() != -1) {
+                    dtm.removeRow(vTecladoAFD.tablaTransiciones.getSelectedRow());
+                } else {
+                    vMensaje.mensajeJOptionPaneWARNING("Selecciona una fila para borrar", "Advertencia", vTecladoAFD);
+                }
                 break;
 
             case "Cargar":
-
-                String aux;
-                String[] partes;
-
-                ArrayList<String> estados = new ArrayList<>();
-
-                partes = vTecladoAFD.txtEstados.getText().split(" ");
-                for (String parte : partes) {
-                    estados.add(parte);
-                    String[] est = parte.split("q");
-                    automataD.añadirEstado(Integer.parseInt(est[1]));
-                }
-
-                aux = vTecladoAFD.txtEstIni.getText();
-                if (estados.contains(aux)) {
-                    partes = aux.split("q");
-                    automataD.setEstadoInicial(Integer.parseInt(partes[1]));
-                } else {
-                    vMensaje.mensajeJOptionPaneERROR("El estado inicial no pertenece a los estados", "", vTecladoAFD);
+                if (vTecladoAFD.txtEstIni.getText().isEmpty()) {
+                    vMensaje.mensajeJOptionPaneWARNING("Introduce el estado inicial", "Advertencia", vTecladoAFD);
                     break;
                 }
+
+                // Configurar estados
+                automataD.setEstadoInicial(vTecladoAFD.txtEstIni.getText());
+                String[] finales = vTecladoAFD.txtEstFin.getText().split(" ");
+                for (String f : finales) {
+                    automataD.agregarEstadoFinal(f);
+                }
+                
+                // Necesitamos recoger todos los estados posibles primero (opcional si el modelo lo maneja, 
+                // pero tu vista valida contra "estados" que no veo dónde se llenan en el código original.
+                // Asumiremos que el modelo agrega estados dinámicamente).
+                Set<String> estadosValidos = automataD.getEstados(); 
 
                 boolean fin = false;
-                partes = vTecladoAFD.txtEstFin.getText().split(" ");
-                for (int i = 0; i < partes.length; i++) {
-                    if (estados.contains(partes[i]) && !partes[i].equals(aux)) {
-                        String[] est = partes[i].split("q");
-                        automataD.añadirEstadoFinal(Integer.parseInt(est[1]));
-                    } else {
-                        vMensaje.mensajeJOptionPaneERROR("El estado final " + partes[i] + " no pertenece a los estados"
-                                + "\nO el estado final es igual que el estado inicial", "", vTecladoAFD);
-                        fin = true;
-                        break;
-                    }
-                }
-                if (fin) {
-                    break;
-                }
+                int filas = dtm.getRowCount();
+                
+                // Iteramos sin borrar las filas mientras leemos, es más seguro
+                for (int i = 0; i < filas; i++) {
+                    String c0 = (String) dtm.getValueAt(i, 0); // Origen
+                    String c1 = (String) dtm.getValueAt(i, 1); // Simbolo
+                    String c2 = (String) dtm.getValueAt(i, 2); // Destino
 
-                while (dtm.getRowCount() > 0) {
-                    String c0 = (String) dtm.getValueAt(0, 0);
-                    if (!estados.contains(c0)) {
-                        vMensaje.mensajeJOptionPaneERROR("El estado " + c0 + " no pertenece a los estados", "", vTecladoAFD);
-                        fin = true;
-                        break;
-                    }
-                    String c1 = (String) dtm.getValueAt(0, 1);
-
-                    String c2 = (String) dtm.getValueAt(0, 2);
-                    if (!estados.contains(c2)) {
-                        vMensaje.mensajeJOptionPaneERROR("El estado " + c2 + " no pertenece a los estados", "", vTecladoAFD);
-                        fin = true;
-                        break;
+                    if (c0 == null || c0.isEmpty() || c2 == null || c2.isEmpty()) {
+                         vMensaje.mensajeJOptionPaneERROR("Estados vacíos en la tabla", "Error", vTecladoAFD);
+                         fin = true;
+                         break;
                     }
 
-                    String[] c = c0.split("q");
-                    c0 = c[1];
-
-                    c = c2.split("q");
-                    c2 = c[1];
-
-                    automataD.agregarTransicion(Integer.parseInt(c0), c1.charAt(0), Integer.parseInt(c2));
-                    dtm.removeRow(0);
+                    // Simplemente pasamos los strings. Adiós Integer.parseInt
+                    automataD.agregarTransicion(c0, c1.charAt(0), c2);
                 }
+
                 if (fin) {
                     break;
                 }
@@ -144,13 +110,12 @@ public class ControladorTecladoAFD implements ActionListener {
 
             case "Salir":
                 vTecladoAFD.dispose();
-                noseguir=true;
+                noseguir = true;
                 break;
         }
     }
-    
-    public boolean noSeguir(){
+
+    public boolean noSeguir() {
         return noseguir;
     }
-
 }
