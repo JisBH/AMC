@@ -58,7 +58,7 @@ public class MainVisual extends javax.swing.JFrame {
 
         lbtitulo.setFont(new java.awt.Font("Trebuchet MS", 1, 25)); // NOI18N
         lbtitulo.setForeground(new java.awt.Color(0, 0, 0));
-        lbtitulo.setText("<html><center> Práctica 1 <br> Análisis de Algoritmos Exhaustivos  <br> con Poda y algoritmos Divide y Vencerás  </center></html>");
+        lbtitulo.setText("<html><center> Práctica 2 <br> Análisis de Algoritmos Voraces  </center></html>");
 
         panelCambio.setPreferredSize(new java.awt.Dimension(786, 451));
 
@@ -81,16 +81,17 @@ public class MainVisual extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(PanelBaseLayout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBaseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(216, 216, 216))
         );
         PanelBaseLayout.setVerticalGroup(
             PanelBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelBaseLayout.createSequentialGroup()
-                .addComponent(lbtitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
+                .addGap(32, 32, 32)
+                .addComponent(lbtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(panelCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
