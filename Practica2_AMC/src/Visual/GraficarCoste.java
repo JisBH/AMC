@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.math.plot.Plot2DPanel;
-import practica1.Solucion;
+import practica2.Solucion;
 
 /**
  *

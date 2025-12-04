@@ -9,7 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import practica1.Solucion;
+import practica2.Solucion;
 
 import java.util.ArrayList;
 import javax.swing.JButton;

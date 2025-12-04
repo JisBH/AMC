@@ -4,10 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import practica1.Algoritmos;
+import practica2.Algoritmos;
 import Comun.Lectura;
 import Comun.Punto;
-import practica1.Solucion;
+import practica2.Solucion;
 
 public class CompararDosEstrategias extends javax.swing.JPanel {
 

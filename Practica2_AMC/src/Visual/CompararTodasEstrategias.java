@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import practica1.Algoritmos;
+import practica2.Algoritmos;
 import Comun.Lectura;
 import Comun.Punto;
-import practica1.Solucion;
+import practica2.Solucion;
 
 /**
  *

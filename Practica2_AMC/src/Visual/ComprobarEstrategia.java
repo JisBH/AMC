@@ -7,11 +7,11 @@ package Visual;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import practica1.Algoritmos;
+import practica2.Algoritmos;
 import Comun.Lectura;
 import Comun.Punto;
 import javax.swing.JOptionPane;
-import practica1.Solucion;
+import practica2.Solucion;
 
 /**
  *

@@ -1,4 +1,4 @@
-package practica1;
+package practica2;
 
 import Comun.Punto;
 
