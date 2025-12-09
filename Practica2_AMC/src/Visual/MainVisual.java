@@ -21,7 +21,7 @@ public class MainVisual extends javax.swing.JFrame {
     public MainVisual() {
         initComponents();
         this.setLocation(300, 100);
-        this.setTitle("\t\t\tPRACTICA 1 - AMC");
+        this.setTitle("\t\t\tAMC - YFE/JBH");
 
         p1 = new PracticaMenu(this);
 
