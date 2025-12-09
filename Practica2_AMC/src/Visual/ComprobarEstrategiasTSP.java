@@ -1,17 +1,35 @@
 package Visual;
 
 import Comun.Punto;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import practica2.Algoritmos;
 import practica2.SolucionTSP;
 
-public class ComprobarEstrategiasTSP extends javax.swing.JPanel {
+public class ComprobarEstrategiasTSP extends JPanel {
 
     private ArrayList<Punto> dataset;
+    private MainVisual main;
+    private PracticaMenu menu;
+    private JTable jTable1;
 
-    public ComprobarEstrategiasTSP(ArrayList<Punto> dataset) {
+    // CONSTRUCTOR ACTUALIZADO: Recibe MainVisual y PracticaMenu para poder volver
+    public ComprobarEstrategiasTSP(MainVisual main, PracticaMenu menu, ArrayList<Punto> dataset) {
+        this.main = main;
+        this.menu = menu;
         this.dataset = dataset;
+        
         initComponents();
         ejecutarAlgoritmos();
     }
@@ -33,26 +51,55 @@ public class ComprobarEstrategiasTSP extends javax.swing.JPanel {
         SolucionTSP s4 = Algoritmos.tspVorazBidireccionalPoda(new ArrayList<>(dataset));
         model.addRow(new Object[]{"Bidireccional Poda", s4.getDistanciaTotal(), s4.getCalculadas(), s4.getTiempoEjecucion()});
         
-        // Graficar la solución de la poda bidireccional automáticamente
-        new Graficar(dataset, s4); 
+        // Graficar la solución (automáticamente o puedes poner un botón si prefieres)
+        // new Graficar(dataset, s4); // Descomenta si quieres que salte sola
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new BorderLayout());
         
-        javax.swing.JLabel lbl = new javax.swing.JLabel("Comprobar Estrategias TSP (Resultados)");
-        lbl.setFont(new java.awt.Font("Segoe UI", 1, 18));
-        lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(lbl, java.awt.BorderLayout.NORTH);
+        // --- Título ---
+        JLabel lbl = new JLabel("Resultados Estrategias TSP");
+        lbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        lbl.setHorizontalAlignment(SwingConstants.CENTER);
+        add(lbl, BorderLayout.NORTH);
 
-        jTable1 = new javax.swing.JTable();
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        // --- Tabla ---
+        jTable1 = new JTable();
+        jTable1.setModel(new DefaultTableModel(
             new Object [][] {},
             new String [] { "Estrategia", "Solucion", "Calculadas", "Tiempo (ms)" }
-        ));
-        javax.swing.JScrollPane scroll = new javax.swing.JScrollPane(jTable1);
-        add(scroll, java.awt.BorderLayout.CENTER);
+        ) {
+            boolean[] canEdit = new boolean [] { false, false, false, false };
+            public boolean isCellEditable(int rowIndex, int columnIndex) { return canEdit [columnIndex]; }
+        });
+        JScrollPane scroll = new JScrollPane(jTable1);
+        add(scroll, BorderLayout.CENTER);
+        
+        // --- Panel Inferior con Botones ---
+        JPanel panelSur = new JPanel(new FlowLayout());
+        
+        JButton btnGrafica = new JButton("Ver Gráfica (Mejor Solución)");
+        btnGrafica.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 // Recalculamos la mejor para mostrarla (o podrías guardarla en una variable de clase)
+                 SolucionTSP s = Algoritmos.tspVorazBidireccionalPoda(new ArrayList<>(dataset));
+                 new Graficar(dataset, s);
+            }
+        });
+        panelSur.add(btnGrafica);
+        
+        JButton btnVolver = new JButton("Volver al Menú");
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // AQUÍ ESTÁ LA CLAVE: Volver a cargar el menú en el Main
+                main.cambiarPanel(menu);
+            }
+        });
+        panelSur.add(btnVolver);
+        
+        add(panelSur, BorderLayout.SOUTH);
     }
-    private javax.swing.JTable jTable1;
 }

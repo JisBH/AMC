@@ -161,8 +161,10 @@ public class PracticaMenu extends JPanel {
         JButton btnP2Comp = new JButton("Comprobar Estrategias (TSP)");
         btnP2Comp.setBounds(20, 260, 200, 30);
         btnP2Comp.addActionListener(e -> {
-            // Este es NUEVO (P2), pide (ArrayList)
-            if (validarDataset()) mainV.cambiarPanel(new ComprobarEstrategiasTSP(dataSet));
+            // CORRECCIÓN: Ahora pasamos mainV y 'this' (el menú) para poder volver
+            if (validarDataset()) {
+                mainV.cambiarPanel(new ComprobarEstrategiasTSP(mainV, PracticaMenu.this, dataSet));
+            }
         });
         add(btnP2Comp);
 
