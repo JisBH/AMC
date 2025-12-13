@@ -16,9 +16,8 @@ public class CompararUniVsBiTSP extends javax.swing.JFrame {
     public CompararUniVsBiTSP() {
         initComponents();
         setTitle("Comparativa: Uni vs Bidireccional");
-        setSize(800, 600); // Un poco más grande para que quepa la tabla
+        setSize(800, 600);
         setVisible(true);
-        // Usamos DISPOSE para que no cierre toda la app, solo esta ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -28,53 +27,42 @@ public class CompararUniVsBiTSP extends javax.swing.JFrame {
             int fin = Integer.parseInt(txFin.getText());
             int sal = Integer.parseInt(txSalto.getText());
             
-            // Configuramos la tabla con nuevas columnas para los tiempos
             String[] columnas = {"Talla", "Gana Uni", "Gana Bi", "T.Medio Uni (ms)", "T.Medio Bi (ms)"};
             DefaultTableModel model = new DefaultTableModel(columnas, 0);
             jTable1.setModel(model);
             
-            // Listas para almacenar datos de las gráficas
             ArrayList<Double> xTallas = new ArrayList<>();
             ArrayList<Double> yGanaU = new ArrayList<>();
             ArrayList<Double> yGanaB = new ArrayList<>();
             ArrayList<Double> yTiempoU = new ArrayList<>();
             ArrayList<Double> yTiempoB = new ArrayList<>();
 
-            // Bucle principal por tamaños
             for(int n = ini; n <= fin; n += sal) {
                 int victoriasU = 0;
                 int victoriasB = 0;
                 double sumaTiempoU = 0;
                 double sumaTiempoB = 0;
-                int repeticiones = 20; // Número de experimentos por talla
+                int repeticiones = 20;
                 
                 for(int r = 0; r < repeticiones; r++) {
                     ArrayList<Punto> dataset = genDataset(n);
                     
-                    // Ejecutamos ambas estrategias (usamos copia del dataset para no alterar el original)
-                    // Usamos las versiones con Poda como sugiere el sentido común para experimentos grandes
                     SolucionTSP solU = Algoritmos.tspVorazUnidireccionalPoda(new ArrayList<>(dataset));
                     SolucionTSP solB = Algoritmos.tspVorazBidireccionalPoda(new ArrayList<>(dataset));
                     
-                    // Comparar costes (distancias) para ver quién gana
                     if (solU.getDistanciaTotal() < solB.getDistanciaTotal()) {
                         victoriasU++;
                     } else if (solB.getDistanciaTotal() < solU.getDistanciaTotal()) {
                         victoriasB++;
                     }
-                    // Si son iguales (empate), no sumamos a ninguno o a ambos, según criterio. 
-                    // Aquí lo dejamos sin sumar como victoria estricta.
                     
-                    // Acumular tiempos
                     sumaTiempoU += solU.getTiempoEjecucion();
                     sumaTiempoB += solB.getTiempoEjecucion();
                 }
                 
-                // Calcular medias
                 double mediaTiempoU = sumaTiempoU / repeticiones;
                 double mediaTiempoB = sumaTiempoB / repeticiones;
                 
-                // Añadir fila a la tabla (formateamos doubles para que no sean enormes)
                 model.addRow(new Object[]{
                     n, 
                     victoriasU, 
@@ -83,7 +71,6 @@ public class CompararUniVsBiTSP extends javax.swing.JFrame {
                     String.format("%.4f", mediaTiempoB)
                 });
                 
-                // Guardar datos para gráficas
                 xTallas.add((double)n);
                 yGanaU.add((double)victoriasU);
                 yGanaB.add((double)victoriasB);
@@ -91,10 +78,8 @@ public class CompararUniVsBiTSP extends javax.swing.JFrame {
                 yTiempoB.add(mediaTiempoB);
             }
             
-            // --- GRÁFICA 1: Victorias (Barras) ---
             mostrarGraficaBarras(xTallas, yGanaU, yGanaB);
             
-            // --- GRÁFICA 2: Tiempos (Líneas) ---
             mostrarGraficaLineas(xTallas, yTiempoU, yTiempoB);
             
         } catch (NumberFormatException e) {
@@ -128,12 +113,11 @@ public class CompararUniVsBiTSP extends javax.swing.JFrame {
         JFrame frame = new JFrame("Gráfica: Comparación de Tiempos");
         frame.setContentPane(plot);
         frame.setSize(600, 500);
-        frame.setLocation(620, 0); // Para que salga al lado de la otra
+        frame.setLocation(620, 0);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
-    // Método auxiliar para convertir ArrayList a double[]
     private double[] listToArray(ArrayList<Double> list) {
         return list.stream().mapToDouble(d -> d).toArray();
     }
@@ -160,14 +144,12 @@ public class CompararUniVsBiTSP extends javax.swing.JFrame {
         pControl.add(new javax.swing.JLabel("Salto:")); pControl.add(txSalto);
         pControl.add(btn);
         
-        // Modelo inicial vacío
         jTable1 = new javax.swing.JTable();
         
         add(pControl, BorderLayout.NORTH);
         add(new javax.swing.JScrollPane(jTable1), BorderLayout.CENTER);
     }
     
-    // Variables
     private javax.swing.JTextField txInicio, txFin, txSalto;
     private javax.swing.JTable jTable1;
 }

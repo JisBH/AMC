@@ -31,7 +31,7 @@ public class CompararTodasEstrategiasTSP extends javax.swing.JFrame {
 
         for(int n=ini; n<=fin; n+=sal) {
             double t1=0, t2=0, t3=0, t4=0;
-            for(int r=0; r<10; r++) { // 10 repeticiones
+            for(int r=0; r<10; r++) {
                 ArrayList<Punto> d = genDataset(n);
                 t1 += Algoritmos.tspVorazUnidireccional(new ArrayList<>(d)).getTiempoEjecucion();
                 t2 += Algoritmos.tspVorazBidireccional(new ArrayList<>(d)).getTiempoEjecucion();

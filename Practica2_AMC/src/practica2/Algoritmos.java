@@ -6,18 +6,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import practica2.SolucionTSP;
 
-/*
- * Clase Algoritmos: Contiene la lógica de P1 (Puntos cercanos) y P2 (TSP Voraz).
- */
+
 public class Algoritmos {
 
-    // ==========================================
-    // PARTE 1: MÉTODOS DE LA PRÁCTICA 1
-    // ==========================================
-
-    /**
-     * Estrategia de búsqueda exhaustiva O(n^2)
-     */
     public static Solucion exhaustivoRecursivo(ArrayList<Punto> puntos) {
         Solucion sol = exhaustivo(puntos, 0, puntos.size() - 1);
         return sol;
@@ -45,9 +36,6 @@ public class Algoritmos {
         return sol;
     }
 
-    /**
-     * Estrategia de búsqueda con poda O(n*log n) + ...
-     */
     public static Solucion exhaustivoPodaRecursivo(ArrayList<Punto> puntos) {
         Solucion sol = null;
         ArrayList<Punto> p = quicksortX(puntos, 0, puntos.size() - 1);
@@ -81,9 +69,6 @@ public class Algoritmos {
         return sol;
     }
 
-    /**
-     * Estrategia de búsqueda con técnica Divide y Vencerás
-     */
     public static Solucion DyVRecursivo(ArrayList<Punto> puntos) {
         Solucion sol = null;
         ArrayList<Punto> p = quicksortX(puntos, 0, puntos.size() - 1);
@@ -146,9 +131,6 @@ public class Algoritmos {
         }
     }
 
-    /**
-     * Estrategia Divide y Vencerás Mejorado
-     */
     public static Solucion DyVconPodaRecursivo(ArrayList<Punto> puntos) {
         Solucion sol = null;
         ArrayList<Punto> p = quicksortX(puntos, 0, puntos.size() - 1);
@@ -241,13 +223,6 @@ public class Algoritmos {
         return sol;
     }
 
-    // ==========================================
-    // PARTE 2: MÉTODOS DE LA PRÁCTICA 2 (TSP VORAZ)
-    // ==========================================
-
-    /**
-     * TSP 1: Voraz Exhaustivo Unidireccional.
-     */
     public static SolucionTSP tspVorazUnidireccional(ArrayList<Punto> puntos) {
         long inicio = System.nanoTime();
         SolucionTSP sol = new SolucionTSP();
@@ -255,14 +230,8 @@ public class Algoritmos {
         int n = puntos.size();
         if (n == 0) return sol;
 
-        // Asumimos que los índices de los puntos son consistentes con su posición o ID.
-        // Si no, necesitamos mapear. Usaremos un array basado en el tamaño para seguridad.
-        // Nota: Si los IDs en el fichero TSP son muy grandes, mejor usar un HashSet<Integer>,
-        // pero para la práctica los IDs suelen ser 1..N. Usaremos n+1 por si acaso.
-        // O mejor: usaremos un boolean[] de tamaño n y accederemos por índice del ArrayList para O(1).
         boolean[] visitados = new boolean[n];
         
-        // Empezamos por el primer punto del array (arbitrario)
         Punto actual = puntos.get(0);
         sol.agregarPunto(actual);
         visitados[0] = true; 
@@ -270,7 +239,6 @@ public class Algoritmos {
         double distanciaTotal = 0;
         int calculadas = 0;
 
-        // Bucle para buscar n-1 siguientes puntos
         for (int i = 0; i < n - 1; i++) {
             double minDist = Double.MAX_VALUE;
             int mejorIndice = -1;
@@ -295,7 +263,6 @@ public class Algoritmos {
             }
         }
 
-        // Volver al origen
         distanciaTotal += distancia(actual, sol.getRuta().get(0));
         calculadas++;
         sol.agregarPunto(sol.getRuta().get(0));
@@ -306,9 +273,6 @@ public class Algoritmos {
         return sol;
     }
 
-    /**
-     * TSP 2: Voraz Exhaustivo Bidireccional.
-     */
     public static SolucionTSP tspVorazBidireccional(ArrayList<Punto> puntos) {
         long inicio = System.nanoTime();
         SolucionTSP sol = new SolucionTSP();
@@ -318,11 +282,9 @@ public class Algoritmos {
 
         boolean[] visitados = new boolean[n];
         
-        // Inicialización: Punto 0
         Punto extremoIzq = puntos.get(0);
         visitados[0] = true;
         
-        // Buscar el punto más cercano al inicial para formar la primera arista
         double minDistInicio = Double.MAX_VALUE;
         int idxSegundo = -1;
         int calculadas = 0;
@@ -339,7 +301,7 @@ public class Algoritmos {
         ArrayList<Punto> dequeRuta = new ArrayList<>();
         dequeRuta.add(extremoIzq);
         
-        Punto extremoDer = extremoIzq; // Valor dummy inicial
+        Punto extremoDer = extremoIzq;
         
         if (idxSegundo != -1) {
             visitados[idxSegundo] = true;
@@ -349,7 +311,6 @@ public class Algoritmos {
         
         double distanciaTotal = minDistInicio;
 
-        // Quedan n - 2 puntos
         for (int i = 0; i < n - 2; i++) {
             double minDist = Double.MAX_VALUE;
             int mejorIndice = -1;
@@ -391,7 +352,6 @@ public class Algoritmos {
             }
         }
 
-        // Cerrar ciclo
         distanciaTotal += distancia(extremoIzq, extremoDer);
         calculadas++;
         dequeRuta.add(dequeRuta.get(0));
@@ -403,22 +363,16 @@ public class Algoritmos {
         return sol;
     }
 
-    /**
-     * TSP 3: Voraz Unidireccional con Poda.
-     */
     public static SolucionTSP tspVorazUnidireccionalPoda(ArrayList<Punto> puntosOriginal) {
         long inicio = System.nanoTime();
         SolucionTSP sol = new SolucionTSP();
         
-        // Copia para ordenar
         ArrayList<Punto> puntosOrdenados = new ArrayList<>(puntosOriginal);
-        // Ordenamos por X para aplicar poda
         Collections.sort(puntosOrdenados, Comparator.comparingDouble(Punto::getX));
         
         int n = puntosOrdenados.size();
         boolean[] visitadosOrdenados = new boolean[n];
 
-        // Empezamos por el punto original 0. Hay que buscar dónde cayó tras ordenar.
         Punto puntoInicial = puntosOriginal.get(0);
         int indiceEnOrdenado = -1;
         for(int k=0; k<n; k++){
@@ -438,10 +392,9 @@ public class Algoritmos {
             double minDist = Double.MAX_VALUE;
             int mejorIndice = -1;
             
-            // Barrido derecha
             for (int k = indiceEnOrdenado + 1; k < n; k++) {
                 if (visitadosOrdenados[k]) continue;
-                if ((puntosOrdenados.get(k).getX() - actual.getX()) >= minDist) break; // PODA
+                if ((puntosOrdenados.get(k).getX() - actual.getX()) >= minDist) break;
                 
                 double d = distancia(actual, puntosOrdenados.get(k));
                 calculadas++;
@@ -451,10 +404,9 @@ public class Algoritmos {
                 }
             }
             
-            // Barrido izquierda
             for (int k = indiceEnOrdenado - 1; k >= 0; k--) {
                 if (visitadosOrdenados[k]) continue;
-                if ((actual.getX() - puntosOrdenados.get(k).getX()) >= minDist) break; // PODA
+                if ((actual.getX() - puntosOrdenados.get(k).getX()) >= minDist) break;
                 
                 double d = distancia(actual, puntosOrdenados.get(k));
                 calculadas++;
@@ -484,9 +436,6 @@ public class Algoritmos {
         return sol;
     }
 
-    /**
-     * TSP 4: Voraz Bidireccional con Poda.
-     */
     public static SolucionTSP tspVorazBidireccionalPoda(ArrayList<Punto> puntosOriginal) {
         long inicio = System.nanoTime();
         SolucionTSP sol = new SolucionTSP();
@@ -497,7 +446,6 @@ public class Algoritmos {
         int n = puntosOrdenados.size();
         boolean[] visitadosOrdenados = new boolean[n];
 
-        // Buscar inicio
         Punto pInicial = puntosOriginal.get(0);
         int idxIzq = -1; 
         for(int k=0; k<n; k++){
@@ -506,19 +454,17 @@ public class Algoritmos {
         visitadosOrdenados[idxIzq] = true;
         Punto extIzq = pInicial;
         
-        // Buscar segundo punto (con poda)
         double minDist = Double.MAX_VALUE;
         int idxSegundo = -1;
         int calculadas = 0;
         
-        // Derecha
         for(int k=idxIzq+1; k<n; k++){
             if ((puntosOrdenados.get(k).getX() - extIzq.getX()) >= minDist) break;
             double d = distancia(extIzq, puntosOrdenados.get(k));
             calculadas++;
             if(d < minDist) { minDist = d; idxSegundo = k; }
         }
-        // Izquierda
+        
         for(int k=idxIzq-1; k>=0; k--){
             if ((extIzq.getX() - puntosOrdenados.get(k).getX()) >= minDist) break;
             double d = distancia(extIzq, puntosOrdenados.get(k));
@@ -536,14 +482,11 @@ public class Algoritmos {
         
         double distanciaTotal = minDist;
 
-        // Bucle principal
         for (int i = 0; i < n - 2; i++) {
             minDist = Double.MAX_VALUE;
             int mejorIndice = -1;
             boolean esParaIzq = false;
 
-            // Extremo Izquierdo
-            // Derecha
             for(int k=idxIzq+1; k<n; k++){
                 if(visitadosOrdenados[k]) continue;
                 if((puntosOrdenados.get(k).getX() - extIzq.getX()) >= minDist) break;
@@ -551,7 +494,7 @@ public class Algoritmos {
                 calculadas++;
                 if(d < minDist) { minDist = d; mejorIndice = k; esParaIzq = true; }
             }
-            // Izquierda
+            
             for(int k=idxIzq-1; k>=0; k--){
                 if(visitadosOrdenados[k]) continue;
                 if((extIzq.getX() - puntosOrdenados.get(k).getX()) >= minDist) break;
@@ -560,8 +503,6 @@ public class Algoritmos {
                 if(d < minDist) { minDist = d; mejorIndice = k; esParaIzq = true; }
             }
 
-            // Extremo Derecho
-            // Derecha
             for(int k=idxDer+1; k<n; k++){
                 if(visitadosOrdenados[k]) continue;
                 if((puntosOrdenados.get(k).getX() - extDer.getX()) >= minDist) break;
@@ -569,7 +510,7 @@ public class Algoritmos {
                 calculadas++;
                 if(d < minDist) { minDist = d; mejorIndice = k; esParaIzq = false; }
             }
-            // Izquierda
+
             for(int k=idxDer-1; k>=0; k--){
                 if(visitadosOrdenados[k]) continue;
                 if((extDer.getX() - puntosOrdenados.get(k).getX()) >= minDist) break;
@@ -606,7 +547,6 @@ public class Algoritmos {
         return sol;
     }
 
-    // --- Métodos Auxiliares de P1 ---
     public static double distancia(Punto a, Punto b) {
         double x = a.getX() - b.getX();
         double y = a.getY() - b.getY();

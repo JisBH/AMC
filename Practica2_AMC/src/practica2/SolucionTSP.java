@@ -7,7 +7,7 @@ public class SolucionTSP {
     private ArrayList<Punto> ruta;
     private double distanciaTotal;
     private int calculadas;
-    private double tiempoEjecucion; // En milisegundos
+    private double tiempoEjecucion;
 
     public SolucionTSP() {
         this.ruta = new ArrayList<>();

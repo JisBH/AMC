@@ -24,7 +24,6 @@ public class ComprobarEstrategiasTSP extends JPanel {
     private PracticaMenu menu;
     private JTable jTable1;
 
-    // CONSTRUCTOR ACTUALIZADO: Recibe MainVisual y PracticaMenu para poder volver
     public ComprobarEstrategiasTSP(MainVisual main, PracticaMenu menu, ArrayList<Punto> dataset) {
         this.main = main;
         this.menu = menu;
@@ -38,7 +37,6 @@ public class ComprobarEstrategiasTSP extends JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
 
-        // Ejecutar los 4 algoritmos TSP
         SolucionTSP s1 = Algoritmos.tspVorazUnidireccional(new ArrayList<>(dataset));
         model.addRow(new Object[]{"Unidireccional Exhaustivo", s1.getDistanciaTotal(), s1.getCalculadas(), s1.getTiempoEjecucion()});
 
@@ -51,20 +49,16 @@ public class ComprobarEstrategiasTSP extends JPanel {
         SolucionTSP s4 = Algoritmos.tspVorazBidireccionalPoda(new ArrayList<>(dataset));
         model.addRow(new Object[]{"Bidireccional Poda", s4.getDistanciaTotal(), s4.getCalculadas(), s4.getTiempoEjecucion()});
         
-        // Graficar la solución (automáticamente o puedes poner un botón si prefieres)
-        // new Graficar(dataset, s4); // Descomenta si quieres que salte sola
     }
 
     private void initComponents() {
         setLayout(new BorderLayout());
         
-        // --- Título ---
         JLabel lbl = new JLabel("Resultados Estrategias TSP");
         lbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
         lbl.setHorizontalAlignment(SwingConstants.CENTER);
         add(lbl, BorderLayout.NORTH);
 
-        // --- Tabla ---
         jTable1 = new JTable();
         jTable1.setModel(new DefaultTableModel(
             new Object [][] {},
@@ -76,14 +70,12 @@ public class ComprobarEstrategiasTSP extends JPanel {
         JScrollPane scroll = new JScrollPane(jTable1);
         add(scroll, BorderLayout.CENTER);
         
-        // --- Panel Inferior con Botones ---
         JPanel panelSur = new JPanel(new FlowLayout());
         
         JButton btnGrafica = new JButton("Ver Gráfica (Mejor Solución)");
         btnGrafica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 // Recalculamos la mejor para mostrarla (o podrías guardarla en una variable de clase)
                  SolucionTSP s = Algoritmos.tspVorazBidireccionalPoda(new ArrayList<>(dataset));
                  new Graficar(dataset, s);
             }
@@ -94,7 +86,6 @@ public class ComprobarEstrategiasTSP extends JPanel {
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // AQUÍ ESTÁ LA CLAVE: Volver a cargar el menú en el Main
                 main.cambiarPanel(menu);
             }
         });

@@ -15,13 +15,11 @@ import javax.swing.JSeparator;
 
 public class PracticaMenu extends JPanel {
 
-    // Variable estática que usan tus clases antiguas
     public static boolean peorcaso = false;
     public static ArrayList<Punto> dataSet = null;
 
     private MainVisual mainV;
 
-    // Componentes
     private JLabel lbdsmemoria;
     private JCheckBox ckpeorcaso;
 
@@ -40,7 +38,6 @@ public class PracticaMenu extends JPanel {
         return lbdsmemoria.getText();
     }
     
-    // Método necesario porque tus clases antiguas (CargarDataSet) piden PracticaMenu
     public MainVisual getMainVisual() {
         return mainV;
     }
@@ -68,7 +65,6 @@ public class PracticaMenu extends JPanel {
     private void initComponents() {
         setLayout(null); // Diseño manual
 
-        // --- GESTIÓN DE DATOS ---
         JLabel lblDatos = new JLabel("Gestión de Datos");
         lblDatos.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblDatos.setBounds(20, 20, 150, 20);
@@ -78,7 +74,6 @@ public class PracticaMenu extends JPanel {
         btnCargar.setBounds(20, 50, 200, 30);
         btnCargar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                // CORRECCIÓN: Pasamos 'this' porque tu CargarDataSet espera (PracticaMenu)
                 new CargarDataSet(PracticaMenu.this).setVisible(true);
             }
         });
@@ -99,7 +94,6 @@ public class PracticaMenu extends JPanel {
         JButton btnTabla = new JButton("Ver Tabla");
         btnTabla.setBounds(500, 50, 100, 30);
         btnTabla.addActionListener(e -> {
-            // CORRECCIÓN: Tu clase MostrarDataSetTabla no recibe parámetros, usa la estática
             if(validarDataset()) new MostrarDataSetTabla().setVisible(true);
         });
         add(btnTabla);
@@ -113,7 +107,6 @@ public class PracticaMenu extends JPanel {
         sep1.setBounds(10, 120, 760, 10);
         add(sep1);
 
-        // --- PRÁCTICA 1 (Puntos Cercanos) ---
         JLabel lblP1 = new JLabel("Práctica 1: Puntos más cercanos");
         lblP1.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblP1.setBounds(20, 130, 300, 20);
@@ -122,7 +115,6 @@ public class PracticaMenu extends JPanel {
         JButton btnP1Comp = new JButton("Comprobar Estrategias");
         btnP1Comp.setBounds(20, 160, 200, 30);
         btnP1Comp.addActionListener(e -> {
-            // CORRECCIÓN: Tu ComprobarEstrategia pide (MainVisual, PracticaMenu)
             if (validarDataset()) mainV.cambiarPanel(new ComprobarEstrategia(mainV, PracticaMenu.this));
         });
         add(btnP1Comp);
@@ -130,7 +122,6 @@ public class PracticaMenu extends JPanel {
         JButton btnP1All = new JButton("Comparar Todas");
         btnP1All.setBounds(230, 160, 150, 30);
         btnP1All.addActionListener(e -> {
-            // CORRECCIÓN: Tu CompararTodasEstrategias pide (MainVisual, PracticaMenu)
             mainV.cambiarPanel(new CompararTodasEstrategias(mainV, PracticaMenu.this));
         });
         add(btnP1All);
@@ -138,7 +129,6 @@ public class PracticaMenu extends JPanel {
         JButton btnP1Two = new JButton("Comparar 2");
         btnP1Two.setBounds(390, 160, 120, 30);
         btnP1Two.addActionListener(e -> {
-            // CORRECCIÓN: Tu CompararDosEstrategias pide (MainVisual, PracticaMenu)
             mainV.cambiarPanel(new CompararDosEstrategias(mainV, PracticaMenu.this));
         });
         add(btnP1Two);
@@ -152,7 +142,7 @@ public class PracticaMenu extends JPanel {
         sep2.setBounds(10, 210, 760, 10);
         add(sep2);
 
-        // --- PRÁCTICA 2 (TSP) ---
+        // --- PRÁCTICA 2  ---
         JLabel lblP2 = new JLabel("Práctica 2: Viajante de Comercio (TSP)");
         lblP2.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lblP2.setBounds(20, 230, 300, 20);
@@ -161,7 +151,6 @@ public class PracticaMenu extends JPanel {
         JButton btnP2Comp = new JButton("Comprobar Estrategias (TSP)");
         btnP2Comp.setBounds(20, 260, 200, 30);
         btnP2Comp.addActionListener(e -> {
-            // CORRECCIÓN: Ahora pasamos mainV y 'this' (el menú) para poder volver
             if (validarDataset()) {
                 mainV.cambiarPanel(new ComprobarEstrategiasTSP(mainV, PracticaMenu.this, dataSet));
             }

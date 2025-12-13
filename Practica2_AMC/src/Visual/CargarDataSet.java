@@ -14,7 +14,7 @@ public class CargarDataSet extends javax.swing.JFrame {
     public CargarDataSet(PracticaMenu jp) {
         initComponents();
         this.jp1 = jp;
-        this.setLocationRelativeTo(null); // Centrar pantalla
+        this.setLocationRelativeTo(null);
         this.setTitle("CARGAR DATASET");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -27,12 +27,12 @@ public class CargarDataSet extends javax.swing.JFrame {
         btd493 = new javax.swing.JButton();
         btd657 = new javax.swing.JButton();
         btdsindice = new javax.swing.JButton();
-        btCargarOtro = new javax.swing.JButton(); // Nuevo boton
+        btCargarOtro = new javax.swing.JButton();
         btcerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-        setLayout(null); // Diseño manual sencillo
+        setLayout(null);
         setSize(450, 350);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); 
@@ -40,7 +40,6 @@ public class CargarDataSet extends javax.swing.JFrame {
         jLabel1.setBounds(130, 20, 200, 30);
         add(jLabel1);
 
-        // Botones ficheros predefinidos
         btberlin52.setText("BERLIN52");
         btberlin52.setBounds(30, 70, 100, 40);
         btberlin52.addActionListener(evt -> cargarFichero("berlin52.tsp"));
@@ -66,13 +65,11 @@ public class CargarDataSet extends javax.swing.JFrame {
         btd657.addActionListener(evt -> cargarFichero("d657.tsp"));
         add(btd657);
 
-        // Generar Aleatorio
         btdsindice.setText("Generar Aleatorio");
         btdsindice.setBounds(250, 120, 150, 40);
         btdsindice.addActionListener(evt -> generarAleatorio());
         add(btdsindice);
         
-        // Nuevo: Cargar cualquier fichero (Requisito P2)
         btCargarOtro.setText("Cargar Otro Fichero...");
         btCargarOtro.setBounds(30, 180, 370, 40);
         btCargarOtro.addActionListener(evt -> abrirFileChooser());
@@ -101,7 +98,6 @@ public class CargarDataSet extends javax.swing.JFrame {
                 int i = Integer.parseInt(s);
                 if (i > 0) {
                     Lectura.generarDataSet(i, PracticaMenu.peorcaso);
-                    // Lectura.generarDataSet guarda en disco como "DataSetN.tsp" y luego lo lee
                     String nombreFichero = "DataSet" + i + ".tsp";
                     cargarFichero(nombreFichero);
                 } else {
@@ -120,10 +116,6 @@ public class CargarDataSet extends javax.swing.JFrame {
         
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File fichero = fileChooser.getSelectedFile();
-            // Asumiendo que Lectura.leerFichero puede aceptar ruta completa o nombre
-            // Si Lectura solo acepta nombre local, habría que modificar Lectura.
-            // Probamos pasando el path absoluto o copiando la logica de lectura.
-            // Para mantener compatibilidad simple:
             PracticaMenu.dataSet = Lectura.leerFichero(fichero.getAbsolutePath());
             jp1.setLbDataSet(fichero.getName());
             this.dispose();

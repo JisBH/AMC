@@ -23,7 +23,6 @@ public class Graficar {
     private JButton btsalir;
     private Plot2DPanel plot = new Plot2DPanel();
 
-    // Constructor para Práctica 1 (Closest Pair)
     public Graficar(ArrayList<Punto> puntos, Solucion sol) {
         this.puntos = puntos;
         this.solP1 = sol;
@@ -31,7 +30,6 @@ public class Graficar {
         init();
     }
     
-    // Constructor para Práctica 2 (TSP)
     public Graficar(ArrayList<Punto> puntos, SolucionTSP sol) {
         this.puntos = puntos;
         this.solTSP = sol;
@@ -60,14 +58,12 @@ public class Graficar {
 
         plot.addScatterPlot("Datos", Color.GREEN, x, y);
 
-        // Caso Práctica 1: Par de puntos más cercanos
         if (solP1 != null) {
             double[] p1 = {solP1.getP1().getX(), solP1.getP1().getY()};
             double[] p2 = {solP1.getP2().getX(), solP1.getP2().getY()};
             plot.addLinePlot("Solucion P1", Color.RED, p1, p2);
         }
         
-        // Caso Práctica 2: Ruta TSP
         if (solTSP != null) {
             ArrayList<Punto> ruta = solTSP.getRuta();
             if (ruta != null && ruta.size() > 1) {
@@ -78,7 +74,6 @@ public class Graficar {
                     rx[i] = ruta.get(i).getX();
                     ry[i] = ruta.get(i).getY();
                 }
-                // Dibuja la ruta en azul
                 plot.addLinePlot("Ruta TSP", Color.BLUE, rx, ry);
             }
         }
